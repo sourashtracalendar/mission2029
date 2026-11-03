@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mission 2029 - Sourashtra Calendar</title>
 <style>
-:root{--bg:#FFFBEB;--orange:#DF6B23;--brown:#A84E26;--border:#F3D5B8;--light:#FFF0D6;}
+:root{--bg:#FFFBEB;--orange:#DF6B23;--brown:#A84E26;--border:#F3D5B8;--light:#FFF0D6;--green:#25D366;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;}
 html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{display:flex;flex-direction:column;}
@@ -18,12 +18,9 @@ body{display:flex;flex-direction:column;}
 .banner h1{font-size:26px;font-weight:900;color:var(--brown);}
 .banner h2{font-size:18px;font-weight:800;color:var(--brown);}
 .banner h3{font-size:13px;color:#8a5a3a;margin-top:4px;}
-
-/* STICKY GOAL BAR */
 .sticky-goal{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.06);}
 .sticky-goal b{font-size:13px;color:var(--brown);}
 .sticky-goal span{font-size:11px;background:var(--light);color:var(--brown);padding:5px 10px;border-radius:999px;font-weight:700;}
-
 .content{padding:14px 14px 100px;max-width:480px;margin:0 auto;width:100%;}
 .title{font-size:19px;font-weight:800;color:#222;}
 .sub{font-size:13px;color:#444;margin-top:6px;}
@@ -33,29 +30,26 @@ body{display:flex;flex-direction:column;}
 .oor-wrap{display:flex;gap:7px;flex-wrap:wrap;}
 .oor-chip{font-size:11.5px;padding:6px 11px;border:1px solid #E8C9A8;border-radius:999px;background:#fff;color:#5a3a20;cursor:pointer;}
 .oor-chip.active{background:var(--orange);color:#fff;border-color:var(--orange);}
-
-/* PUZZLE MODAL */
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;padding:12px;overflow-y:auto;}
+.qr-box{margin:18px 0;border:1.5px dashed #E8B48A;border-radius:18px;padding:18px;background:#fff;text-align:center;}
+.qr-img{width:150px;height:150px;margin:10px auto;display:block;border-radius:12px;border:1px solid #f0d0a0;padding:6px;background:#fff;}
+#modal,#waModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;padding:12px;overflow-y:auto;}
 .modal-box{background:var(--bg);border-radius:20px;max-width:480px;margin:20px auto;padding:16px;border:1px solid var(--border);}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .modal-head h3{font-size:15px;font-weight:800;color:var(--brown);}
 .close-btn{width:32px;height:32px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;}
-.combo{width:100%;height:42px;border:1.5px solid #E9C6A0;border-radius:12px;padding:0 12px;background:#fff;font-size:13px;margin-bottom:12px;}
+.combo,.wa-input{width:100%;height:42px;border:1.5px solid #E9C6A0;border-radius:12px;padding:0 12px;background:#fff;font-size:13px;margin-bottom:10px;}
+.wa-input.addr{height:70px;padding:10px 12px;resize:none;}
 .puzzle-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.puzzle-piece{background:#fff;border:1.5px solid #F2D8B9;border-radius:14px;padding:10px;position:relative;overflow:hidden;}
-.puzzle-piece.filled-0{border-color:#e5e7eb;}
-.puzzle-piece.filled-4{border-color:var(--orange);background:#FFF7ED;}
-.p-name{font-size:12px;font-weight:700;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.puzzle-piece{background:#fff;border:1.5px solid #F2D8B9;border-radius:14px;padding:10px;}
+.p-name{font-size:12px;font-weight:700;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .p-dots{display:flex;gap:4px;margin-top:6px;}
 .dot{width:14px;height:14px;border-radius:4px;border:1px solid #E8C9A8;background:#fff;}
 .dot.on{background:var(--orange);border-color:var(--orange);}
 .p-count{font-size:10px;margin-top:4px;color:#777;}
-
-.qr-box{margin:18px 0;border:1.5px dashed #E8B48A;border-radius:18px;padding:18px;background:#fff;text-align:center;}
-.qr-img{width:150px;height:150px;margin:10px auto;display:block;border-radius:12px;border:1px solid #f0d0a0;padding:6px;background:#fff;}
-.bottom-bar{height:76px;background:var(--bg);border-top:1px solid #F2D8B9;display:flex;align-items:center;gap:10px;padding:10px 12px;flex-shrink:0;}
-.bottom-bar input{flex:1;height:46px;border:1.5px solid #E9C6A0;border-radius:999px;padding:0 16px;font-size:13px;background:#fff;outline:none;}
-.donate-btn{height:46px;background:var(--orange);color:#fff;border:none;border-radius:999px;padding:0 22px;font-weight:800;font-size:14px;cursor:pointer;}
+.bottom-bar{height:80px;background:var(--bg);border-top:1px solid #F2D8B9;display:flex;align-items:center;gap:8px;padding:10px 10px;flex-shrink:0;}
+.bottom-bar input{flex:1;height:46px;border:1.5px solid #E9C6A0;border-radius:999px;padding:0 14px;font-size:13px;background:#fff;outline:none;min-width:0;}
+.donate-btn{height:46px;background:var(--orange);color:#fff;border:none;border-radius:999px;padding:0 16px;font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap;}
+.wa-btn{height:46px;width:46px;min-width:46px;background:var(--green);color:#fff;border:none;border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;}
 </style>
 </head>
 <body>
@@ -65,124 +59,48 @@ body{display:flex;flex-direction:column;}
 </div>
 
 <div class="middle" id="middle">
-  <div class="banner">
-    <h1>🗓️ MISSION 2029</h1>
-    <h2>SOURASHTRA CALENDAR</h2>
-    <h3>Corpus Fund Creation</h3>
-  </div>
-
-  <!-- STICKY COMBO / MENU BAR -->
-  <div class="sticky-goal" onclick="openModal()">
-    <b>🎯 Goal: Rs.5,000 x 4 Donors per Oor</b>
-    <span>View Puzzle ▾</span>
-  </div>
-
+  <div class="banner"><h1>🗓️ MISSION 2029</h1><h2>SOURASHTRA CALENDAR</h2><h3>Corpus Fund Creation</h3></div>
+  <div class="sticky-goal" onclick="openModal()"><b>🎯 Goal: Rs.5,000 x 4 Donors per Location</b><span>View Progress ▾</span></div>
   <div class="content">
     <div class="title">Sourashtra Calendar Print - Corpus</div>
     <div class="sub">Initiative by <b style="color:var(--brown);">SVAYA SOURASHTRA SVABHAAVAM</b></div>
-
-    <div class="section">
-      <h4>Overview</h4>
-      <p>To ensure lifetime printing of Sourashtra Calendar, SVAYA SOURASHTRA SVABHAAVAM is creating a permanent corpus. Each Oor takes responsibility for 4 donors @ ₹5,000 each.</p>
-    </div>
-
-    <div class="section">
-      <h4>Oor Locations</h4>
-      <div class="oor-wrap" id="oorWrap"></div>
-    </div>
-
-    <div class="qr-box">
-      <div style="font-weight:800;color:var(--brown);font-size:14px;">Scan to Donate ₹5,000</div>
-      <img id="qrImg" class="qr-img" alt="QR">
-      <div style="font-size:12px;margin-top:6px;">UPI: <b id="upiText" style="color:var(--brown);">yourupi@okicici</b></div>
-      <div style="font-size:10px;color:#888;">Note: <span id="noteText">Mission2029</span></div>
-    </div>
+    <div class="section"><h4>Overview</h4><p>To ensure lifetime printing of Sourashtra Calendar, SVAYA SOURASHTRA SVABHAAVAM is creating a permanent corpus. Each Location takes responsibility for 4 donors @ ₹5,000 each. <b>Donors get 10 free calendars every year</b> at their preferred address.</p></div>
+    <div class="section"><h4>Location wise</h4><div class="oor-wrap" id="oorWrap"></div></div>
+    <div class="qr-box"><div style="font-weight:800;color:var(--brown);font-size:14px;">Scan to Donate ₹5,000</div><img id="qrImg" class="qr-img" alt="QR"><div style="font-size:12px;margin-top:6px;">UPI: <b id="upiText" style="color:var(--brown);">yourupi@okicici</b></div><div style="font-size:10px;color:#888;">Note: <span id="noteText">Mission2029</span></div></div>
   </div>
 </div>
 
-<!-- PUZZLE MODAL -->
-<div id="modal" onclick="if(event.target==this)closeModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <h3>🧩 Corpus Puzzle - Donors per Oor</h3>
-      <button class="close-btn" onclick="closeModal()">✕</button>
-    </div>
-    <select class="combo" id="filter" onchange="renderPuzzle()">
-      <option value="all">All Oors - Goal: Rs.5,000 x 4 Donors per Oor</option>
-      <option value="0">0 Donors - Need 4</option>
-      <option value="1">1 Donor - Need 3</option>
-      <option value="2">2 Donors - Need 2</option>
-      <option value="3">3 Donors - Need 1</option>
-      <option value="4">4 Donors - Completed ✓</option>
-    </select>
-    <div class="puzzle-grid" id="puzzleGrid"></div>
-    <div style="font-size:11px;color:#777;margin-top:10px;text-align:center;">Each puzzle piece = 1 Oor • 4 blocks = 4 Donors • Tap Oor to donate</div>
-  </div>
-</div>
+<div id="modal" onclick="if(event.target==this)closeModal()"><div class="modal-box"><div class="modal-head"><h3>📊 Corpus Fund - Location wise donors</h3><button class="close-btn" onclick="closeModal()">✕</button></div><select class="combo" id="filter" onchange="renderPuzzle()"><option value="all">All Locations - Goal: Rs.5,000 x 4 per Location</option><option value="0">0 Donors</option><option value="1">1 Donor</option><option value="2">2 Donors</option><option value="3">3 Donors</option><option value="4">Completed ✓</option></select><div class="puzzle-grid" id="puzzleGrid"></div></div></div>
 
-<div class="bottom-bar">
-  <input id="oorInput" placeholder="ENTER YOUR OOR NAME">
-  <button class="donate-btn" onclick="donateNow()">Donate Now</button>
-</div>
+<div id="waModal" onclick="if(event.target==this)closeWaModal()"><div class="modal-box"><div class="modal-head"><h3>📦 Calendar Delivery Address</h3><button class="close-btn" onclick="closeWaModal()">✕</button></div><p style="font-size:12px;color:#555;margin-bottom:10px;">10 Free Calendars every year will be sent to your preferred address</p><input class="wa-input" id="donorName" placeholder="Donor Full Name *"><input class="wa-input" id="donorPhone" placeholder="Contact Number *"><select class="combo" id="addrType"><option value="My Address">Delivery to My Address</option><option value="Sabha">Delivery to Sabha</option><option value="Perumal Koil">Delivery to Perumal Koil</option></select><textarea class="wa-input addr" id="donorAddr" placeholder="Full Delivery Address with Pincode *"></textarea><input class="wa-input" id="waOorInput" placeholder="Location Name"><button onclick="sendWhatsApp()" style="width:100%;height:46px;background:var(--green);color:#fff;border:none;border-radius:999px;font-weight:800;font-size:14px;cursor:pointer;margin-top:6px;">Send via WhatsApp</button></div></div>
+
+<div class="bottom-bar"><input id="oorInput" placeholder="LOCATION NAME"><button class="donate-btn" onclick="donateNow()">Donate</button><button class="wa-btn" onclick="openWaModal()" title="Send Delivery Address">💬</button></div>
 
 <script>
 const UPI_ID = "yourupi@okicici";
 const PAYEE_NAME = "Sourashtra Calendar";
 const AMOUNT = "5000";
 const FORM_LINK = "https://forms.gle/YOUR_FORM_LINK";
+const WHATSAPP_NUMBER = "919999999999";
 
 const oorList = ["Madurai","Kumbakonam Town","Nagal Nagar","Paramathi","Thuvarankurichi","Dharasuram","Thanjavur","Ayyampettai","Ammapettai KRK Theru","Ammapettai KK Theru","Emaneeswaram","Paramakudi","Trichy","Uraiyur","Thiruvappur","Parambur","Iluppour","Erode","Palayamkottai","Veeravanallur","Vellankuli","Pudukudi","Kilakkulam","Salem Sevvapettai","Salem Town","Salem Lamskar","Salem SMS Thondu Niruvanam","Aranthangi","Othur","Thirubuvanam","Ammaimayappan","Palani","Periyakulam","Mel Mangalam","Nilakkottai","Dindukkal Town","Rasipuram","Coimbatore","Chennai","Bhuvanagiri","Pondicherry","Kanchipuram","Walajapet","Arani","Othur-2","Tiruppur","Chennai Mahajana","Bombay","Bengaluru","Paramathi Aanmeega","Bombay K.Ve.","Tirunelveli","Hyderabad","Delhi","Madurai Puranakar"];
 
-// Demo data: 0-4 donors per Oor - replace with real data from Sheet
 const donorData = {};
-oorList.forEach((name,i)=>{
-  // Random demo 0-4 for now, you can replace with actual counts
-  donorData[name] = [0,1,0,2,4,1,0,3,2,1,0,4,2,1,0,2,1,0,3,4,1,0,2,1,0,3,2,0,1,0,4,1,0,2,1,3,0,1,2,0,4,0,1,0,2,1,0,3,1,0,2,1,4,0,1,0][i % 56] || Math.floor(Math.random()*5);
-});
+oorList.forEach((n,i)=>{ donorData[n] = [0,1,0,2,4,1,0,3,2,1,0,4,2,1,0,2,1,0,3,4,1,0,2,1,0,3,2,0,1,0,4,1,0,2,1,3,0,1,2,0,4,0,1,0,2,1,0,3,1,0,2,1,4,0,1,0][i%56] || Math.floor(Math.random()*5); });
 
 const wrap=document.getElementById('oorWrap'), input=document.getElementById('oorInput'), qrImg=document.getElementById('qrImg'), upiText=document.getElementById('upiText'), noteText=document.getElementById('noteText'), grid=document.getElementById('puzzleGrid');
 
-function renderOors(){
-  oorList.forEach(name=>{
-    const div=document.createElement('div'); div.className='oor-chip'; div.textContent='📍 '+name;
-    div.onclick=()=>{input.value=name; document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active')); div.classList.add('active'); updateUPI();};
-    wrap.appendChild(div);
-  });
-}
-
-function renderPuzzle(){
-  const filter=document.getElementById('filter').value;
-  grid.innerHTML='';
-  oorList.forEach(name=>{
-    const count=donorData[name]||0;
-    if(filter!=='all' && parseInt(filter)!==count) return;
-    const piece=document.createElement('div');
-    piece.className='puzzle-piece filled-'+count;
-    let dots='';
-    for(let i=0;i<4;i++){ dots+=`<div class="dot ${i<count?'on':''}"></div>`; }
-    piece.innerHTML=`<div class="p-name">${name}</div><div class="p-dots">${dots}</div><div class="p-count">${count}/4 donors ${count==4?'✓ Completed':''}</div>`;
-    piece.onclick=()=>{input.value=name; updateUPI(); closeModal(); window.scrollTo(0,0); document.getElementById('middle').scrollTop=0;};
-    grid.appendChild(piece);
-  });
-}
-
-function updateUPI(){
-  const oor=(input.value||'').trim();
-  const tn=oor?`Mission2029 ${oor}`:`Mission2029`;
-  noteText.textContent=tn;
-  const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent(tn)}`;
-  qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;
-  upiText.textContent=UPI_ID;
-}
+function renderOors(){oorList.forEach(name=>{const div=document.createElement('div'); div.className='oor-chip'; div.textContent='📍 '+name; div.onclick=()=>{input.value=name; document.getElementById('waOorInput').value=name; document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active')); div.classList.add('active'); updateUPI();}; wrap.appendChild(div);});}
+function renderPuzzle(){const filter=document.getElementById('filter').value; grid.innerHTML=''; oorList.forEach(name=>{const count=donorData[name]||0; if(filter!=='all' && parseInt(filter)!==count) return; const piece=document.createElement('div'); piece.className='puzzle-piece'; let dots=''; for(let i=0;i<4;i++){dots+=`<div class="dot ${i<count?'on':''}"></div>`;} piece.innerHTML=`<div class="p-name">${name}</div><div class="p-dots">${dots}</div><div class="p-count">${count}/4 donors ${count==4?'✓':''}</div>`; piece.onclick=()=>{input.value=name; document.getElementById('waOorInput').value=name; updateUPI(); closeModal();}; grid.appendChild(piece);});}
+function updateUPI(){const oor=(input.value||'').trim(); const tn=oor?`Mission2029 ${oor}`:`Mission2029`; noteText.textContent=tn; const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent(tn)}`; qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`; upiText.textContent=UPI_ID;}
 function openModal(){document.getElementById('modal').style.display='block'; renderPuzzle();}
 function closeModal(){document.getElementById('modal').style.display='none';}
+function openWaModal(){document.getElementById('waOorInput').value=input.value; document.getElementById('waModal').style.display='block';}
+function closeWaModal(){document.getElementById('waModal').style.display='none';}
 function sharePage(){if(navigator.share){navigator.share({title:'Mission 2029',url:location.href});} else {navigator.clipboard.writeText(location.href); alert('Link copied');}}
-function donateNow(){
-  const oor=input.value.trim(); if(!oor){alert('Enter your Oor name'); return;}
-  const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`;
-  window.location.href=link; setTimeout(()=>window.open(FORM_LINK,'_blank'),1000);
-}
-input.addEventListener('input',updateUPI);
+function donateNow(){const oor=input.value.trim(); if(!oor){alert('Enter your Location name'); return;} const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`; window.location.href=link; setTimeout(()=>window.open(FORM_LINK,'_blank'),1000);}
+function sendWhatsApp(){const name=document.getElementById('donorName').value.trim(); const phone=document.getElementById('donorPhone').value.trim(); const type=document.getElementById('addrType').value; const addr=document.getElementById('donorAddr').value.trim(); const oor=document.getElementById('waOorInput').value.trim() || input.value.trim(); if(!name || !phone || !addr){alert('Please fill Name, Contact and Address'); return;} const msg=`*Mission 2029 - Sourashtra Calendar Corpus*%0A%0A*Donor Details*%0AName: ${encodeURIComponent(name)}%0ALocation: ${encodeURIComponent(oor)}%0AContact: ${encodeURIComponent(phone)}%0A%0A*Calendar Delivery*%0AType: ${encodeURIComponent(type)}%0AAddress: ${encodeURIComponent(addr)}%0A%0A*Benefit:* 10 Free Calendars every year%0APayment: Rs.5000 x 4 Donors per Location`; const url=`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`; window.open(url,'_blank');}
+input.addEventListener('input',()=>{updateUPI(); document.getElementById('waOorInput').value=input.value;});
 renderOors(); updateUPI(); renderPuzzle();
 </script>
 </body>
