@@ -5,39 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mission 2029 - Sourashtra Calendar | Anaithu Oor Makkal</title>
 <style>
-:root{--maroon:#7f1d1d;--maroon2:#b91c1c;--gold:#fbbf24;}
+:root{--bg:#FFFBEB;--card:#FFFFFF;--orange:#DF6B23;--brown:#A84E26;--text:#1f1f1f;--muted:#6b7280;--border:#F3D5B8;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;}
-html,body{height:100%;overflow:hidden;background:#f5f5f7;}
+html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{display:flex;flex-direction:column;}
-.top-bar{height:56px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid #ececec;flex-shrink:0;}
-.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#111;font-weight:600;font-size:15px;}
-.share-btn{width:38px;height:38px;border:1px solid #e5e7eb;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;}
-.middle{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:#fff;}
+.top-bar{height:54px;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0;border-bottom:1px solid #F5E6D0;}
+.back-link{color:#333;font-weight:600;font-size:14px;text-decoration:none;display:flex;gap:6px;align-items:center;}
+.share-btn{width:38px;height:38px;border:1px solid var(--border);border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.middle{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--bg);}
 .middle::-webkit-scrollbar{display:none;width:0;height:0;}
-.banner{background: radial-gradient(circle at top right,#991b1b, #450a0a 70%);padding:34px 16px 30px;text-align:center;}
-.banner h1{font-size:30px;color:#fbbf24;font-weight:900;}
-.banner h2{font-size:22px;color:#fbbf24;font-weight:800;margin-top:4px;}
-.banner h3{font-size:16px;color:#fde68a;margin-top:8px;font-weight:500;}
-.content{padding:18px 14px 100px;}
-.title{font-size:22px;font-weight:800;color:#111;}
-.sub{font-size:13px;color:#6b7280;margin-top:4px;}
-.org-card{margin:14px 0;border:1px solid #e8e8e8;border-radius:14px;padding:12px;display:flex;justify-content:space-between;background:#fff;}
-.progress-wrap{margin:16px 0;background:#fafafa;border:1px solid #f3e0e0;border-radius:14px;padding:14px;}
-.progress-head{display:flex;justify-content:space-between;font-size:13px;font-weight:700;}
-.bar{height:10px;background:#e5e7eb;border-radius:999px;margin:10px 0;overflow:hidden;}
-.fill{height:100%;background:linear-gradient(90deg,#7f1d1d,#b91c1c);width:38%;border-radius:999px;}
-.hint{font-size:12px;color:#6b7280;line-height:1.4;}
+.banner{background:linear-gradient(180deg,#FFF3D6 0%, #FFE9B8 100%);padding:32px 16px;text-align:center;border-bottom:1px solid #F5D9A8;}
+.banner h1{font-size:28px;font-weight:900;color:var(--brown);}
+.banner h2{font-size:20px;font-weight:800;color:var(--brown);margin-top:2px;}
+.banner h3{font-size:14px;color:#8a5a3a;margin-top:6px;font-weight:500;}
+.content{padding:16px 14px 100px;max-width:480px;margin:0 auto;width:100%;}
+.title{font-size:20px;font-weight:800;color:#222;}
+.sub{font-size:12.5px;color:var(--muted);margin-top:6px;}
+.card{margin:14px 0;background:var(--card);border:1px solid #F2D8B9;border-radius:16px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(223,107,35,.08);}
+.progress{margin:16px 0;background:#fff;border:1px solid #F2D8B9;border-radius:16px;padding:14px;}
+.progress-head{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:#333;}
+.bar{height:10px;background:#FFF0D6;border-radius:999px;margin:10px 0;overflow:hidden;}
+.fill{height:100%;background:var(--orange);width:38%;border-radius:999px;}
+.hint{font-size:11.5px;color:#7a6a5a;line-height:1.4;}
 .section{margin:20px 0;}
-.section h4{font-size:16px;font-weight:700;margin-bottom:6px;}
-.section p{font-size:14px;color:#374151;line-height:1.6;}
-.oor-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
-.oor-chip{font-size:12.5px;padding:8px 12px;border:1px solid #e5e7eb;border-radius:999px;background:#f9fafb;cursor:pointer;display:flex;gap:5px;}
-.oor-chip.active{background:#7f1d1d;color:#fff;border-color:#7f1d1d;}
-.qr-box{margin:18px 0;border:2px dashed #d1a0a0;border-radius:16px;padding:18px;background:#fffbf0;text-align:center;}
-.qr-img{width:170px;height:170px;margin:10px auto;background:#fff;border-radius:12px;padding:8px;border:1px solid #eee;display:block;}
-.bottom-bar{height:76px;background:#fff;border-top:1px solid #e5e7eb;display:flex;align-items:center;gap:10px;padding:10px 12px;flex-shrink:0;box-shadow:0 -6px 20px rgba(0,0,0,.06);}
-.bottom-bar input{flex:1;height:46px;border:1px solid #d1d5db;border-radius:12px;padding:0 14px;font-size:14px;}
-.donate-btn{height:46px;background:#b91c1c;color:#fff;border:none;border-radius:12px;padding:0 20px;font-weight:800;font-size:14px;cursor:pointer;}
+.section h4{font-size:15px;font-weight:700;color:#222;margin-bottom:6px;}
+.section p{font-size:13.5px;color:#444;line-height:1.6;}
+.oor-wrap{display:flex;gap:8px;flex-wrap:wrap;}
+.oor-chip{font-size:12px;padding:7px 12px;border:1px solid #E8C9A8;border-radius:999px;background:#fff;cursor:pointer;color:#5a3a20;}
+.oor-chip.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+.qr-box{margin:18px 0;border:1.5px dashed #E8B48A;border-radius:18px;padding:18px;background:#fff;text-align:center;}
+.qr-img{width:160px;height:160px;margin:10px auto;background:#fff;border-radius:12px;padding:6px;border:1px solid #f0d0a0;display:block;}
+.bottom-bar{height:76px;background:var(--bg);border-top:1px solid #F2D8B9;display:flex;align-items:center;gap:10px;padding:10px 12px;flex-shrink:0;}
+.bottom-bar input{flex:1;height:46px;border:1.5px solid #E9C6A0;border-radius:999px;padding:0 16px;font-size:13px;background:#fff;outline:none;}
+.bottom-bar input:focus{border-color:var(--orange);}
+.donate-btn{height:46px;background:var(--orange);color:#fff;border:none;border-radius:999px;padding:0 22px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(223,107,35,.25);}
 </style>
 </head>
 <body>
@@ -46,67 +47,31 @@ body{display:flex;flex-direction:column;}
   <button class="share-btn" onclick="sharePage()">⤴</button>
 </div>
 <div class="middle">
-  <div class="banner"><h1>MISSION 2029</h1><h2>SOURASHTRA CALENDAR</h2><h3>Corpus Fund Creation</h3></div>
+  <div class="banner"><h1>🗓️ MISSION 2029</h1><h2>SOURASHTRA CALENDAR</h2><h3>Corpus Fund Creation</h3></div>
   <div class="content">
-    <div class="title">Sourashtra Calendar Print - Permanent Corpus</div>
-    <div class="sub">📍 55 Oor Makkal across India • Organized by <b>Anaithu Oor Makkal</b></div>
-    <div class="org-card"><div>🏛️ <b>Anaithu Oor Makkal</b><div style="font-size:11px;color:#6b7280;">Organized by</div></div><span style="font-size:12px;background:#dcfce7;color:#166534;padding:5px 10px;border-radius:999px;font-weight:700;">55 Oor Makkal • Live</span></div>
-    <div class="progress-wrap">
-      <div class="progress-head"><span>₹3,80,000 raised</span><span>38% • Goal ₹11,00,000</span></div>
-      <div class="bar"><div class="fill"></div></div>
-      <div class="hint">Goal: <b>₹5,000 x 4 Donors</b> per Oor Makkal = ₹20,000 per Oor<br>55 Oor x ₹20,000 = ₹11,00,000 Corpus</div>
-    </div>
-    <div class="section"><h4>Overview</h4><p>To ensure lifetime printing of Sourashtra Calendar, Anaithu Oor Makkal is creating a permanent corpus fund. Each Oor Makkal takes responsibility for 4 donors at ₹5,000 each.</p></div>
-    <div class="section"><h4>Select Your Oor Makkal</h4><div class="oor-wrap" id="oorWrap"></div></div>
-    <div class="qr-box">
-      <div style="font-weight:800;color:#7f1d1d;">Scan to Donate ₹5,000</div>
-      <img id="qrImg" class="qr-img" alt="UPI QR">
-      <div>UPI ID: <b id="upiText">yourupi@okicici</b></div>
-      <div style="font-size:11px;color:#6b7280;">Note: <span id="noteText">Mission2029</span></div>
-    </div>
+    <div class="title">Sourashtra Calendar Print - Corpus</div>
+    <div class="sub">📍 55 Oor Makkal across India • Organized by <b style="color:var(--brown);">Anaithu Oor Makkal</b></div>
+    <div class="card"><div style="display:flex;gap:10px;align-items:center;"><div style="width:38px;height:38px;background:#FFF0D6;border-radius:10px;display:flex;align-items:center;justify-content:center;">🏛️</div><div><div style="font-size:10px;color:#888;">Organized by</div><div style="font-weight:800;font-size:14px;">Anaithu Oor Makkal</div></div></div><span style="font-size:11px;background:#FFE9C2;color:#8a4a20;padding:5px 10px;border-radius:999px;font-weight:700;">55 Oor Makkal • Live</span></div>
+    <div class="progress"><div class="progress-head"><span>₹3,80,000 raised</span><span>38% • Goal ₹11,00,000</span></div><div class="bar"><div class="fill"></div></div><div class="hint">Goal: <b>₹5,000 x 4 Donors</b> per Oor Makkal = ₹20,000 per Oor<br>55 Oor Makkal = ₹11,00,000 Permanent Corpus</div></div>
+    <div class="section"><h4>Overview</h4><p>To ensure lifetime printing of Sourashtra Calendar, Anaithu Oor Makkal is creating a permanent corpus. Each Oor Makkal takes responsibility for 4 donors @ ₹5,000 each. Become one of the 4 pillars of your Oor Makkal.</p></div>
+    <div class="section"><h4>Oor Makkal Locations</h4><div class="oor-wrap" id="oorWrap"></div></div>
+    <div class="qr-box"><div style="font-weight:800;color:var(--brown);">Scan to Donate ₹5,000</div><img id="qrImg" class="qr-img" alt="UPI QR"><div style="font-size:12px;margin-top:6px;">UPI ID: <b id="upiText" style="color:var(--brown);">yourupi@okicici</b></div><div style="font-size:10px;color:#888;margin-top:3px;">Note: <span id="noteText">Mission2029</span> • GPay • PhonePe • Paytm</div></div>
   </div>
 </div>
-<div class="bottom-bar">
-  <input id="oorInput" placeholder="ENTER YOUR OOR NAME">
-  <button class="donate-btn" onclick="donateNow()">❤ Donate Now</button>
-</div>
+<div class="bottom-bar"><input id="oorInput" placeholder="ENTER YOUR OOR NAME"><button class="donate-btn" onclick="donateNow()">Donate Now</button></div>
 <script>
-const UPI_ID = "yourupi@okicici"; // <-- CHANGE THIS
+const UPI_ID = "yourupi@okicici";
 const PAYEE_NAME = "Sourashtra Calendar Corpus";
 const AMOUNT = "5000";
 const FORM_LINK = "https://forms.gle/YOUR_FORM_LINK";
-
 const oorList = ["Madurai","Kumbakonam Town","Nagal Nagar","Paramathi","Thuvarankurichi","Dharasuram","Thanjavur","Ayyampettai","Ammapettai KRK Theru","Ammapettai KK Theru","Emaneeswaram","Paramakudi","Trichy","Uraiyur","Thiruvappur","Parambur","Iluppour","Erode","Palayamkottai","Veeravanallur","Vellankuli","Pudukudi","Kilakkulam","Salem Sevvapettai","Salem Town","Salem Lamskar Makkal","Salem SMS Thondu Niruvanam","Aranthangi","Othur","Thirubuvanam","Ammaimayappan","Palani","Periyakulam","Mel Mangalam","Nilakkottai","Dindukkal Town","Rasipuram","Coimbatore","Chennai","Bhuvanagiri","Pondicherry","Kanchipuram","Walajapet","Arani","Othur-2","Tiruppur","Chennai Mahajana Makkal","Bombay Makkal","Bengaluru","Paramathi Aanmeega Makkal","Bombay K.Ve. Makkal","Tirunelveli","Hyderabad Makkal","Delhi Makkal","Madurai Puranakar"];
-
 const wrap=document.getElementById('oorWrap'), input=document.getElementById('oorInput'), qrImg=document.getElementById('qrImg'), upiText=document.getElementById('upiText'), noteText=document.getElementById('noteText');
 let selectedOor='';
-function renderOors(){
-  oorList.forEach(name=>{
-    const div=document.createElement('div'); div.className='oor-chip'; div.textContent='📍 '+name;
-    div.onclick=()=>{selectedOor=name; input.value=name; document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active')); div.classList.add('active'); updateUPI();};
-    wrap.appendChild(div);
-  });
-}
-function updateUPI(){
-  const oor=(input.value||selectedOor||'').trim();
-  const tn=oor?`Mission2029 ${oor}`:`Mission2029`;
-  noteText.textContent=tn;
-  const upiLink=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent(tn)}`;
-  qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiLink)}`;
-  upiText.textContent=UPI_ID;
-}
-function sharePage(){
-  const data={title:'Mission 2029 - Sourashtra Calendar',text:'Join Mission 2029: Rs.5000 x 4 donors per Oor Makkal',url:location.href};
-  if(navigator.share){navigator.share(data);} else {navigator.clipboard.writeText(location.href); alert('Link copied!');}
-}
-function donateNow(){
-  const oor=input.value.trim(); if(!oor){alert('Please enter your Oor Makkal name'); return;}
-  const upiLink=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`;
-  window.location.href=upiLink;
-  setTimeout(()=>{window.open(FORM_LINK,'_blank');},1200);
-}
-input.addEventListener('input',updateUPI);
-renderOors(); updateUPI();
+function renderOors(){oorList.forEach(name=>{const div=document.createElement('div'); div.className='oor-chip'; div.textContent='📍 '+name; div.onclick=()=>{selectedOor=name; input.value=name; document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active')); div.classList.add('active'); updateUPI();}; wrap.appendChild(div);});}
+function updateUPI(){const oor=(input.value||selectedOor||'').trim(); const tn=oor?`Mission2029 ${oor}`:`Mission2029`; noteText.textContent=tn; const upiLink=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent(tn)}`; qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiLink)}`; upiText.textContent=UPI_ID;}
+function sharePage(){if(navigator.share){navigator.share({title:'Mission 2029 - Sourashtra Calendar',text:'Mission 2029 Corpus - Anaithu Oor Makkal',url:location.href});} else {navigator.clipboard.writeText(location.href); alert('Link copied!');}}
+function donateNow(){const oor=input.value.trim(); if(!oor){alert('Please enter your Oor Makkal name'); return;} const upiLink=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${AMOUNT}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`; window.location.href=upiLink; setTimeout(()=>{window.open(FORM_LINK,'_blank');},1200);}
+input.addEventListener('input',updateUPI); renderOors(); updateUPI();
 </script>
 </body>
 </html>
