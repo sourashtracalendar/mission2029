@@ -81,7 +81,7 @@ body{display:flex;flex-direction:column;align-items:center;}
       <p>To ensure lifetime printing of Sourashtra Calendar, SVAYA SOURASHTRA SVABHAAVAM is creating a permanent corpus fund. Each Location contributes <b>Rs.20,000 to the corpus</b> — this can be shared by few donors together. <b>10 free calendars will be delivered every year</b> for that Location at its chosen address.</p>
       <div class="highlight-box">📲 <b>After transferring the donation amount, please WhatsApp your Donor Name, Contact Number and Calendar Delivery Address.</b><br><br>You may choose delivery to your own address, or to your local Perumal Temple / Sabha address with their concurrence. One Location = 10 Calendars / Year.</div>
     </div>
-    <div class="section"><h4>Location wise</h4><div class="oor-wrap" id="oorWrap">Loading locations...</div></div>
+    <div class="section"><h4>Locations</h4><div class="oor-wrap" id="oorWrap">Loading locations...</div></div>
     <div class="qr-box"><div style="font-weight:800;color:var(--brown);font-size:14px;">Scan to Donate for your Location</div><img id="qrImg" class="qr-img" alt="QR"><div style="font-size:12px;margin-top:6px;">UPI: <b id="upiText">yourupi@okicici</b></div><div style="font-size:10px;color:#888;">Note: <span id="noteText">Mission2029</span></div><div style="font-size:11px;color:#5a3a20;margin-top:8px;font-weight:700;">Goal: ₹20K / Location (Shared) • 10 Calendars / Location / Year</div></div>
   </div>
 </div>
@@ -96,104 +96,30 @@ body{display:flex;flex-direction:column;align-items:center;}
 const UPI_ID = "yourupi@okicici";
 const PAYEE_NAME = "Sourashtra Calendar";
 const WHATSAPP_NUMBER = "919999999999";
-
 const PUBLIC_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQB_RVLAMQkB3pDrpw_hZ_y5ggFZrPL5WPKZSHxJeeHV68BYex1R_tisyX6YRaNVHLVzdSbpPkKP0rq/pub?gid=269643400&single=true&output=csv";
 const LOCATIONS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQB_RVLAMQkB3pDrpw_hZ_y5ggFZrPL5WPKZSHxJeeHV68BYex1R_tisyX6YRaNVHLVzdSbpPkKP0rq/pub?gid=1636158857&single=true&output=csv";
-
 let oorList=[], amountData={};
 const wrap=document.getElementById('oorWrap'), input=document.getElementById('oorInput'), qrImg=document.getElementById('qrImg'), upiText=document.getElementById('upiText'), noteText=document.getElementById('noteText'), grid=document.getElementById('puzzleGrid');
-const GOAL = 20000;
-const BLOCK = 5000;
-
-function parseCSV(text){
-  const lines=text.trim().split(/\r?\n/);
-  return lines.map(l=>l.split(',').map(s=>s.trim().replace(/^"|"$/g,'')));
-}
-
-function normalizeAmount(val){
-  let n = parseInt(String(val).replace(/[^0-9]/g,''))||0;
-  if(n>0 && n<=4) { // old format: donors count 1-4
-    return n*BLOCK;
-  }
-  return Math.min(GOAL, n);
-}
-
+const GOAL=20000, BLOCK=5000;
+function parseCSV(text){const lines=text.trim().split(/\r?\n/);return lines.map(l=>l.split(',').map(s=>s.trim().replace(/^"|"$/g,'')));}
+function normalizeAmount(val){let n=parseInt(String(val).replace(/[^0-9]/g,''))||0;if(n>0&&n<=4){return n*BLOCK;}return Math.min(GOAL,n);}
 async function loadAll(){
   try{
-    const locRes=await fetch(LOCATIONS_CSV_URL);
-    const locRows=parseCSV(await locRes.text());
-    const locHeader=locRows[0].map(h=>h.toLowerCase());
-    const locIdx=locHeader.indexOf('location')>=0?locHeader.indexOf('location'):0;
-    oorList=locRows.slice(1).map(r=>r[locIdx]).filter(Boolean);
-
-    const pubRes=await fetch(PUBLIC_CSV_URL);
-    const pubRows=parseCSV(await pubRes.text());
-    const pubHeader=pubRows[0].map(h=>h.toLowerCase());
-    const pLocIdx=pubHeader.indexOf('location')>=0?pubHeader.indexOf('location'):0;
-    let pAmtIdx = pubHeader.findIndex(h=>h.includes('amount'));
-    if(pAmtIdx<0) pAmtIdx = pubHeader.findIndex(h=>h.includes('donor'));
-    if(pAmtIdx<0) pAmtIdx=1;
-    amountData={};
-    pubRows.slice(1).forEach(r=>{
-      const loc=r[pLocIdx]; const raw=r[pAmtIdx];
-      if(loc) amountData[loc.trim()]=normalizeAmount(raw);
-    });
-    oorList.forEach(l=>{if(!(l in amountData)) amountData[l]=0;});
-    renderOors(); renderPuzzle(); updateUPI();
-  }catch(e){wrap.innerHTML='Failed to load sheet - check publish settings'; console.error(e);}
+    const locRes=await fetch(LOCATIONS_CSV_URL);const locRows=parseCSV(await locRes.text());const locHeader=locRows[0].map(h=>h.toLowerCase());const locIdx=locHeader.indexOf('location')>=0?locHeader.indexOf('location'):0;oorList=locRows.slice(1).map(r=>r[locIdx]).filter(Boolean);
+    const pubRes=await fetch(PUBLIC_CSV_URL);const pubRows=parseCSV(await pubRes.text());const pubHeader=pubRows[0].map(h=>h.toLowerCase());const pLocIdx=pubHeader.indexOf('location')>=0?pubHeader.indexOf('location'):0;let pAmtIdx=pubHeader.findIndex(h=>h.includes('amount'));if(pAmtIdx<0)pAmtIdx=pubHeader.findIndex(h=>h.includes('donor'));if(pAmtIdx<0)pAmtIdx=1;amountData={};pubRows.slice(1).forEach(r=>{const loc=r[pLocIdx];const raw=r[pAmtIdx];if(loc)amountData[loc.trim()]=normalizeAmount(raw);});oorList.forEach(l=>{if(!(l in amountData))amountData[l]=0;});renderOors();renderPuzzle();updateUPI();
+  }catch(e){wrap.innerHTML='Failed to load sheet - check publish settings';}
 }
-
-function renderOors(){wrap.innerHTML=''; oorList.forEach(name=>{const div=document.createElement('div'); div.className='oor-chip'; div.textContent='📍 '+name; div.onclick=()=>{input.value=name; document.getElementById('waOorInput').value=name; document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active')); div.classList.add('active'); updateUPI();}; wrap.appendChild(div);});}
-function renderPuzzle(){
-  const filter=document.getElementById('filter').value;
-  grid.innerHTML='';
-  oorList.forEach(name=>{
-    const amt=amountData[name]||0;
-    if(filter!=='all' && parseInt(filter)!==amt) return;
-    const dotsCount = Math.floor(amt / BLOCK);
-    const piece=document.createElement('div'); piece.className='puzzle-piece';
-    let dots=''; for(let i=0;i<4;i++){dots+=`<div class="dot ${i<dotsCount?'on':''}"></div>`;}
-    piece.innerHTML=`<div class="p-name">${name}</div><div class="p-dots">${dots}</div><div class="p-amount">₹${amt.toLocaleString('en-IN')} / ₹20K</div><div class="p-count">${amt>=GOAL?'Completed ✓ - 10 Calendars/Location': amt>0 ? `${dotsCount} block${dotsCount>1?'s':''} • ₹${(GOAL-amt).toLocaleString('en-IN')} to go` : 'Need ₹20K'}</div>`;
-    piece.onclick=()=>{input.value=name; document.getElementById('waOorInput').value=name; updateUPI(); closeModal();};
-    grid.appendChild(piece);
-  });
-  const totalCollected=Object.values(amountData).reduce((a,b)=>a+b,0);
-  const totalGoal=oorList.length*GOAL;
-  document.getElementById('progressLabel').textContent=`₹${(totalCollected/1000).toFixed(0)}K / ₹${(totalGoal/1000).toFixed(0)}K • View ▾`;
-}
-function updateUPI(){
-  const oor=(input.value||'').trim();
-  const tn=oor?`Mission2029 ${oor}`:`Mission2029`;
-  noteText.textContent=tn;
-  // Default UPI for QR will be full amount but donor can edit in app
-  const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${GOAL}&cu=INR&tn=${encodeURIComponent(tn)}`;
-  qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;
-  upiText.textContent=UPI_ID;
-}
-function openModal(){document.getElementById('modal').style.display='block'; renderPuzzle();}
+function renderOors(){wrap.innerHTML='';oorList.forEach(name=>{const div=document.createElement('div');div.className='oor-chip';div.textContent='📍 '+name;div.onclick=()=>{input.value=name;document.getElementById('waOorInput').value=name;document.querySelectorAll('.oor-chip').forEach(c=>c.classList.remove('active'));div.classList.add('active');updateUPI();};wrap.appendChild(div);});}
+function renderPuzzle(){const filter=document.getElementById('filter').value;grid.innerHTML='';oorList.forEach(name=>{const amt=amountData[name]||0;if(filter!=='all'&&parseInt(filter)!==amt)return;const dotsCount=Math.floor(amt/BLOCK);const piece=document.createElement('div');piece.className='puzzle-piece';let dots='';for(let i=0;i<4;i++){dots+=`<div class="dot ${i<dotsCount?'on':''}"></div>`;}piece.innerHTML=`<div class="p-name">${name}</div><div class="p-dots">${dots}</div><div class="p-amount">₹${amt.toLocaleString('en-IN')} / ₹20K</div><div class="p-count">${amt>=GOAL?'Completed ✓ - 10 Calendars/Location':amt>0?`${dotsCount} block${dotsCount>1?'s':''} • ₹${(GOAL-amt).toLocaleString('en-IN')} to go`:'Need ₹20K'}</div>`;piece.onclick=()=>{input.value=name;document.getElementById('waOorInput').value=name;updateUPI();closeModal();};grid.appendChild(piece);});const totalCollected=Object.values(amountData).reduce((a,b)=>a+b,0);const totalGoal=oorList.length*GOAL;document.getElementById('progressLabel').textContent=`₹${(totalCollected/1000).toFixed(0)}K / ₹${(totalGoal/1000).toFixed(0)}K • View ▾`;}
+function updateUPI(){const oor=(input.value||'').trim();const tn=oor?`Mission2029 ${oor}`:`Mission2029`;noteText.textContent=tn;const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${GOAL}&cu=INR&tn=${encodeURIComponent(tn)}`;qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}`;upiText.textContent=UPI_ID;}
+function openModal(){document.getElementById('modal').style.display='block';renderPuzzle();}
 function closeModal(){document.getElementById('modal').style.display='none';}
-function openWaModal(){document.getElementById('waOorInput').value=input.value; document.getElementById('waModal').style.display='block';}
+function openWaModal(){document.getElementById('waOorInput').value=input.value;document.getElementById('waModal').style.display='block';}
 function closeWaModal(){document.getElementById('waModal').style.display='none';}
-function sharePage(){if(navigator.share){navigator.share({title:'Mission 2029 - Sourashtra Calendar',text:'Goal: ₹20,000 per Location (Shared) - 10 Calendars per Location per Year',url:location.href});} else {navigator.clipboard.writeText(location.href); alert('Link copied');}}
-function donateNow(){
-  const oor=input.value.trim(); if(!oor){alert('Enter your Location name'); return;}
-  const amt = prompt(`Enter amount for ${oor} (₹5,000 to ₹20,000, Shared allowed):`, "5000");
-  if(!amt) return;
-  const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amt)}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`;
-  window.location.href=link;
-}
-function sendWhatsApp(){
-  const name=document.getElementById('donorName').value.trim();
-  const phone=document.getElementById('donorPhone').value.trim();
-  const type=document.getElementById('addrType').value;
-  const addr=document.getElementById('donorAddr').value.trim();
-  const oor=document.getElementById('waOorInput').value.trim() || input.value.trim();
-  if(!name || !phone || !addr){alert('Please fill Name, Contact and Address'); return;}
-  const amt = amountData[oor] || 0;
-  const msg=`*Mission 2029 - Sourashtra Calendar Corpus*%0A%0A*Donor Details*%0AName: ${encodeURIComponent(name)}%0ALocation: ${encodeURIComponent(oor)}%0AContact: ${encodeURIComponent(phone)}%0A%0A*Calendar Delivery - Per Location*%0AType: ${encodeURIComponent(type)}%0AAddress: ${encodeURIComponent(addr)}%0ABenefit: 10 Calendars / Year / Location%0A%0A*Corpus Goal:* ₹20,000 per Location (Shared)%0ACurrent for ${encodeURIComponent(oor)}: ₹${amt}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');
-}
-input.addEventListener('input',()=>{updateUPI(); document.getElementById('waOorInput').value=input.value;});
+function sharePage(){if(navigator.share){navigator.share({title:'Mission 2029 - Sourashtra Calendar',text:'Goal: ₹20,000 per Location (Shared) - 10 Calendars per Location per Year',url:location.href});}else{navigator.clipboard.writeText(location.href);alert('Link copied');}}
+function donateNow(){const oor=input.value.trim();if(!oor){alert('Enter your Location name');return;}const amt=prompt(`Enter amount for ${oor} (₹5,000 to ₹20,000, Shared allowed):`,"5000");if(!amt)return;const link=`upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${encodeURIComponent(amt)}&cu=INR&tn=${encodeURIComponent('Mission2029 '+oor)}`;window.location.href=link;}
+function sendWhatsApp(){const name=document.getElementById('donorName').value.trim();const phone=document.getElementById('donorPhone').value.trim();const type=document.getElementById('addrType').value;const addr=document.getElementById('donorAddr').value.trim();const oor=document.getElementById('waOorInput').value.trim()||input.value.trim();if(!name||!phone||!addr){alert('Please fill Name, Contact and Address');return;}const amt=amountData[oor]||0;const msg=`*Mission 2029 - Sourashtra Calendar Corpus*%0A%0A*Donor Details*%0AName: ${encodeURIComponent(name)}%0ALocation: ${encodeURIComponent(oor)}%0AContact: ${encodeURIComponent(phone)}%0A%0A*Calendar Delivery - Per Location*%0AType: ${encodeURIComponent(type)}%0AAddress: ${encodeURIComponent(addr)}%0ABenefit: 10 Calendars / Year / Location%0A%0A*Corpus Goal:* ₹20,000 per Location (Shared)%0ACurrent for ${encodeURIComponent(oor)}: ₹${amt}`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`,'_blank');}
+input.addEventListener('input',()=>{updateUPI();document.getElementById('waOorInput').value=input.value;});
 loadAll();
 </script>
 </body>
