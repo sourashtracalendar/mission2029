@@ -74,14 +74,14 @@ body{display:flex;flex-direction:column;align-items:center;}
 
 <div class="middle">
   <div class="banner"><h1>🗓️ MISSION 2029</h1><h2>SOURASHTRA CALENDAR</h2><h3>Corpus Fund Creation</h3></div>
-  <div class="sticky-goal" onclick="openModal()"><b>🎯 Goal: 50+ Locations</b><span id="progressLabel">Loading...</span></div>
+  <div class="sticky-goal" onclick="openModal()"><b>🎯 Goal: 50+ Locations | 200+ Donors </b><span id="progressLabel">Loading...</span></div>
   <div class="content">
     <div class="title">Sourashtra Calendar Print - Corpus</div>
     <div class="sub">Initiative by <b style="color:var(--brown);">SVAYA SOURASHTRA SVABHAAVAM</b></div>
     <div class="section">
       <h4>Overview</h4>
-      <p>To ensure Sourashtra Calendar is printed year after year, for generations to come, SVAYA SOURASHTRA SVABHAAVAM is creating a permanent corpus fund. Our mission is to reach <b>50+ Sourashtra locations</b>. Each location contributes <b>Rs.20,000 to the corpus</b> — this can be shared by few donors together. <b>10 free calendars will be delivered every year</b> for that location at its chosen address.</p>
-      <div class="highlight-box">📲 <b>After transferring Rs.20,000 per location (shared allowed), please WhatsApp your Donor Name, Contact and Calendar Delivery Address.</b><br><br>Delivery can be to your address or to your local Perumal Temple / Sabha with their concurrence. One Location = 10 Calendars / Year.</div>
+      <p>To ensure Sourashtra Calendar is printed year after year, for generations to come, SVAYA SOURASHTRA SVABHAAVAM is creating a permanent corpus fund. Our mission is to reach <b>200+ Donors across 50+ Sourashtra locations</b>. Each Donor contributes <b>Rs.5,000 to the corpus</b>. <b>10 free calendars will be delivered every year</b> for that location at its chosen address.</p>
+      <div class="highlight-box">📲 <b>After transferring the amount, please WhatsApp your Name, Contact and Calendar Delivery Address.</b><br><br>Delivery can be to your address or to your local Perumal Temple / Sabha with their concurrence. One Location = 10 Calendars / Year.</div>
     </div>
     <div class="section"><h4>Locations</h4><div class="oor-wrap" id="oorWrap">Loading locations...</div></div>
     <div class="qr-box"><div style="font-weight:800;color:var(--brown);font-size:14px;">Scan to Donate for your Location</div><img id="qrImg" class="qr-img" alt="QR"><div style="font-size:12px;margin-top:6px;">UPI: <b id="upiText">yourupi@okicici</b></div><div style="font-size:10px;color:#888;">Note: <span id="noteText">Mission2029</span></div><div style="font-size:11px;color:#5a3a20;margin-top:8px;font-weight:700;">Goal: 50+ Locations • 10 Calendars / Location / Year</div></div>
@@ -92,7 +92,9 @@ body{display:flex;flex-direction:column;align-items:center;}
 
 <div id="waModal" onclick="if(event.target==this)closeWaModal()"><div class="modal-box"><div class="modal-head"><h3>📦 Calendar Delivery Address</h3><button class="close-btn" onclick="closeWaModal()">✕</button></div><input class="wa-input" id="donorName" placeholder="Donor Full Name *"><input class="wa-input" id="donorPhone" placeholder="Contact Number *"><select class="combo" id="addrType"><option value="My Address">Delivery to My Address</option><option value="Sabha">Delivery to Sabha (with concurrence)</option><option value="Perumal Temple">Delivery to Perumal Temple (with concurrence)</option></select><textarea class="wa-input addr" id="donorAddr" placeholder="Full Delivery Address for 10 Calendars/Year with Pincode *"></textarea><input class="wa-input" id="waOorInput" placeholder="Location Name"><button onclick="sendWhatsApp()" style="width:100%;height:46px;background:var(--green);color:#fff;border:none;border-radius:999px;font-weight:800;font-size:14px;cursor:pointer;margin-top:6px;">Send via WhatsApp</button></div></div>
 
-<div class="bottom-bar"><input id="oorInput" placeholder="LOCATION NAME"><button class="donate-btn" onclick="donateNow()">Donate</button><button class="wa-btn" onclick="openWaModal()">💬</button></div>
+<div class="bottom-bar"><input id="oorInput" placeholder="LOCATION NAME">
+  <!-- <button class="donate-btn" onclick="donateNow()">Donate</button> -->
+  <button class="wa-btn" onclick="openWaModal()">💬</button></div>
 
 <script>
 const UPI_ID = "maramani@okicici";
